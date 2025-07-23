@@ -1,153 +1,94 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Login Ulang Tahun</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
   <style>
     body {
-      min-height: 100vh;
-      background: linear-gradient(to right, #fce4ec, #e0f7fa);
-      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial Rounded MT Bold', sans-serif;
+      background: linear-gradient(to bottom, #ffe4e1, #e0ffff);
+      height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      padding-top: 40px;
+      align-items: center;
+      flex-direction: column;
     }
-
     .container {
-      background: #fff8f5;
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(255, 200, 221, 0.4);
+      background-color: white;
       padding: 30px;
-      width: 320px;
-      position: relative;
-    }
-
-    h2 {
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
       text-align: center;
-      color: #ff80ab;
     }
-
-    .input-group {
-      position: relative;
-      margin-bottom: 20px;
-    }
-
-    .input-group input {
+    input {
       width: 100%;
-      padding: 12px 40px 12px 40px;
-      border: 2px solid #ffd6e8;
-      border-radius: 30px;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #ccc;
+      border-radius: 10px;
       outline: none;
-      box-shadow: 0 0 8px #ffe0f0;
-      box-sizing: border-box;
+      box-shadow: 0 0 5px #ffd700;
     }
-
-    .input-group label {
-      position: absolute;
-      top: -12px;
-      left: 20px;
-      background: white;
-      padding: 0 5px;
-      color: #ff4081;
-      font-size: 12px;
-    }
-
-    .input-group .icon {
-      position: absolute;
-      top: 50%;
-      left: 12px;
-      transform: translateY(-50%);
-      font-size: 18px;
-      color: #ff80ab;
-    }
-
-    .btn {
-      width: 100%;
-      background-color: #ffd6e8;
+    button {
+      padding: 10px 20px;
       border: none;
-      color: #c2185b;
-      padding: 12px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    .btn:hover {
+      border-radius: 10px;
       background-color: #ffb6c1;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
     }
-
     .hidden {
       display: none;
     }
-
-    .message {
-      text-align: center;
-      font-weight: bold;
-      color: #ad1457;
-      margin: 15px 0;
+    .calendar-icon {
+      font-size: 1.2rem;
+      margin-right: 5px;
     }
-
-    .options button {
-      margin: 10px;
-      padding: 10px 20px;
-      border-radius: 20px;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-      background-color: #ffe0f0;
+    .lamp-line {
+      border-top: 2px dashed #ffd700;
+      margin: 20px 0;
+      animation: blink 1s infinite;
     }
-
-    .options button:hover {
-      background-color: #ffb6c1;
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
     }
   </style>
 </head>
 <body>
   <div class="container" id="form">
-    <h2>Login Ulang Tahun</h2>
-    <div class="input-group">
-      <span class="icon">👸</span>
-      <label>Nama Lengkap</label>
-      <input type="text" id="name" placeholder="Nama lengkap">
-    </div>
-    <div class="input-group">
-      <span class="icon">📅</span>
-      <label>Tanggal Lahir</label>
-      <input type="date" id="birth">
-    </div>
-    <div class="input-group">
-      <span class="icon">🦟</span>
-      <label>Password</label>
-      <input type="password" id="pass" placeholder="Password">
-    </div>
-    <button class="btn" onclick="login()">Login</button>
-  </div>
-
-  <div class="message hidden" id="message"></div>
-
-  <div class="options hidden" id="options">
-    <button onclick="lanjut()">Mau lanjut</button>
-    <button id="tidak" onclick="tidakLanjut()">Tidak</button>
-    <button class="hidden" id="harusMau" onclick="lanjut()">Harus mau</button>
-  </div>
-
-  <script>
+    <div class="lamp-line"></div>
+    <label><span class="calendar-icon">👸</span>Nama Lengkap</label>
+    <input type="text" id="name" placeholder="Masukkan nama">
+    <label><span class="calendar-icon">📅</span>Tanggal Lahir</label>
+    <input type="date" id="birth">
+    <label><span class="calendar-icon">🔒</span>Password</label>
+    <input type="password" id="password" placeholder="Masukkan password">
+    <button onclick="login()">Login</button>
+  </div>  <div class="container hidden" id="message">
+    <h2 id="greeting"></h2>
+  </div>  <div class="container hidden" id="options">
+    <button onclick="lanjut()">Mau lanjut ke halaman berikutnya</button>
+    <button onclick="tidakLanjut()">Tidak</button>
+  </div>  <div class="container hidden" id="tidak">
+    <p>Yakin tidak? 🤔</p>
+    <button onclick="lanjut()">Harus mau!</button>
+  </div>  <script>
     function login() {
       const name = document.getElementById("name").value.trim();
-      const birth = document.getElementById("birth").value; // format: YYYY-MM-DD
-      const pass = document.getElementById("pass").value;
-
-      if (!name || !birth || !pass) {
-        alert("Semua kolom harus diisi!");
-        return;
-      }
+      const birth = document.getElementById("birth").value;
+      const pass = document.getElementById("password").value;
 
       if (birth === "2009-07-24" && pass === "051224") {
         document.getElementById("form").classList.add("hidden");
         document.getElementById("message").classList.remove("hidden");
-        document.getElementById("message").innerHTML = 🎉 Selamat ulang tahun, ${name}!;
+        document.getElementById("greeting").innerHTML = 🎉 Selamat ulang tahun, <b>${name}</b>!;
         document.getElementById("options").classList.remove("hidden");
       } else {
         alert("Tanggal lahir dan/atau password salah!");
@@ -155,13 +96,12 @@
     }
 
     function tidakLanjut() {
-      document.getElementById("tidak").classList.add("hidden");
+      document.getElementById("tidak").classList.remove("hidden");
     }
 
     function lanjut() {
       const name = document.getElementById("name").value.trim();
-      window.location.href = 'happybirthday.html?name=${encodeURIComponent(name)}';
+      window.location.href = happybirthday.html?name=${encodeURIComponent(name)};
     }
-  </script>
-</body>
+  </script></body>
 </html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF9AA2;
+            --secondary: #FFB7B2;
+            --accent: #FFDAC1;
+            --light: #E2F0CB;
+            --text: #5E5E5E;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text);
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+        
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: #f9f9f9;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 154, 162, 0.2);
+        }
+        
+        .icon {
+            position: absolute;
+            left: 15px;
+            top: 38px;
+            color: var(--primary);
+        }
+        
+        .light-line {
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .light-line::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 100%;
+            background: white;
+            animation: lightMove 3s infinite;
+            box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.8);
+        }
+        
+        @keyframes lightMove {
+            0% { left: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 100%; opacity: 0; }
+        }
+        
+        button {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 154, 162, 0.4);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 154, 162, 0.6);
+        }
+        
+        .message {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: var(--accent);
+            border-radius: 10px;
+        }
+        
+        .birthday-message {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 15px;
+        }
+        
+        .options {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .option-btn {
+            margin: 5px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .yes-btn {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .no-btn {
+            background-color: #e0e0e0;
+            color: var(--text);
+        }
+        
+        .force-btn {
+            display: none;
+            margin-top: 10px;
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .hidden-page {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .hidden-page h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .hidden-img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="login-form">
+            <h1><i class="fas fa-birthday-cake"></i> Login Ulang Tahun</h1>
+            
+            <div class="form-group">
+                <label for="fullname">Nama Lengkap</label>
+                <i class="fas fa-user icon"></i>
+                <input type="text" id="fullname" placeholder="Masukkan nama lengkap Anda">
+            </div>
+            
+            <div class="light-line"></div>
+            
+            <div class="form-group">
+                <label for="birthdate">Tanggal Lahir</label>
+                <i class="fas fa-calendar-day icon"></i>
+                <input type="date" id="birthdate">
+            </div>
+            
+            <div class="light-line"></div>
+            
+            <div class="form-group">
+                <label for="password">Password Rahasia</label>
+                <i class="fas fa-lock icon"></i>
+                <input type="password" id="password" placeholder="Masukkan password rahasia">
+            </div>
+            
+            <button id="login-btn">Login Sekarang</button>
+        </div>
+        
+        <div id="welcome-message" class="message">
+            <div class="birthday-message" id="bday-text"></div>
+            <p>Tertarik lanjut ke halaman spesial?</p>
+            <div class="options">
+                <button class="option-btn yes-btn" id="yes-btn">Mau lanjut</button>
+                <button class="option-btn no-btn" id="no-btn">Tidak mau</button>
+            </div>
+            <button class="force-btn" id="force-btn">Harus mau!</button>
+        </div>
+        
+        <div id="next-page" class="hidden-page">
+            <h2><i class="fas fa-gift"></i> Halaman Spesial!</h2>
+            <p>Selamat datang di halaman spesial ulang tahun!</p>
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/370616f6-768d-4ad5-b070-34528a66a588.png" alt="Pesta ulang tahun dengan balon warna-warni dan kue ulang tahun" class="hidden-img">
+            <p>Semoga harimu menyenangkan!</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-btn').addEventListener('click', function() {
+            const fullname = document.getElementById('fullname').value.trim();
+            const birthdate = document.getElementById('birthdate').value;
+            const password = document.getElementById('password').value;
+            
+            // Cek tanggal lahir dan password
+            const correctDate = birthdate === '2009-07-24';
+            const correctPassword = password === '051224';
+            
+            if (fullname && correctDate && correctPassword) {
+                // Tampilkan pesan selamat datang
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('welcome-message').style.display = 'block';
+                document.getElementById('options').style.display = 'block';
+                document.getElementById('bday-text').textContent = `Selamat ulang tahun ${fullname}!`;
+                document.querySelector('.options').style.display = 'block';
+                document.getElementById('force-btn').style.display = 'none';
+            } else {
+                alert('Salah! Silakan coba lagi, atau Tanyakan pada developer nya.');
+            }
+        });
+        
+        // Tombol pilihan
+        document.getElementById('yes-btn').addEventListener('click', function() {
+            window.location.href = 'balon.html';
+        });
+        
+        document.getElementById('no-btn').addEventListener('click', function() {
+            document.getElementById('force-btn').style.display = 'block';
+            document.querySelector('.options').style.display = 'none';
+            
+            // Otomatis klik force-btn setelah 1 detik
+            setTimeout(function() {
+                document.getElementById('force-btn').click();
+            }, 1000);
+        });
+        
+        document.getElementById('force-btn').addEventListener('click', function() {
+            document.getElementById('welcome-message').style.display = 'none';
+            document.getElementById('next-page').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

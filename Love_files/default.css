@@ -83,33 +83,3 @@ a {
 .space {
 	margin-right: 150px;
 }
- .next-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      padding: 12px 24px;
-      background-color: #ff69b4;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      z-index: 9999;
-      transition: transform 0.2s ease, background-color 0.2s ease;
-      display: none; /* sembunyikan dulu */
-    }
-
-    .next-btn:hover {
-      background-color: #ff85c1;
-      transform: scale(1.05);
-    }
-
-    .next-btn:active {
-      transform: scale(0.95);
-    }
-
-    canvas {
-      pointer-events: none; /* canvas tidak menutupi tombol */
-    }
